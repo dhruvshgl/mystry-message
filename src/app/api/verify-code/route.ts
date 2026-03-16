@@ -38,14 +38,14 @@ export async function POST(request: Request) {
                 success: false,
                 message: "Verification code has expired please sign-up again to get a new code"
             }, { status : 400}
-        )
+            )
         } else {
             return Response.json(
             {
                 success: false,
                 message: "Incorrect Verification Code"
             }, { status : 400}
-        )
+            )
         }
 
     } catch (error) {

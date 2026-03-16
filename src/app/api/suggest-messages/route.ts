@@ -15,7 +15,7 @@ export async function POST(req: Request) {
     const response = await openai.completions.create({
       model: 'gpt-3.5-turbo-instruct',
       max_tokens: 400,
-      stream: true,
+      stream: true,    // Instead of waiting for the full response, OpenAI sends small chunks continuously.
       prompt,
     });
 
