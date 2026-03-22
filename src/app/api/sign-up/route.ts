@@ -74,7 +74,7 @@ export async function POST(request: Request) {
             return Response.json({
                 success: false,
                 message: emailResponse.message
-            }, {status: 500})
+            }, {status: 400})
         }
 
         // verification email sent , now user just need to verify it 

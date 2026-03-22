@@ -9,6 +9,8 @@ export async function GET(request:Request) {
     await dbConnect()
     
     const session = await getServerSession(authOptions)
+    console.log("SESSION:", JSON.stringify(session))  // add this
+    console.log("COOKIES:", request.headers.get('cookie'))  // add this
     const user: User = session?.user as User
 
     if (!session || !session.user) {
@@ -24,7 +26,7 @@ export async function GET(request:Request) {
 
     try {
         const user =  await UserModel.aggregate([
-            { $match: { id: userId } },
+            { $match: { _id: userId } },
             { $unwind: '$messages' },
             { $sort: { 'messages.createdAt': -1 } },
             { $group: { _id: '$_id' , messages: { $push: '$messages' } } }

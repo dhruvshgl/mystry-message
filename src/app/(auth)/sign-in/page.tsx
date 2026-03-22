@@ -2,14 +2,9 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
-import { useEffect, useState } from 'react'
 import Link from "next/link"
-import { useDebounceCallback} from "usehooks-ts"
 import { toast } from "sonner"  // toast deprecated now in sonner , so read docs before using
 import { useRouter } from "next/navigation"
-import { signUpSchema } from "@/schemas/signUpSchema"
-import axios , { AxiosError } from "axios"
-import { ApiResponse } from "@/types/ApiResponse"
 import { Input } from "@/components/ui/input"
 import {
   Form,
@@ -19,7 +14,6 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Button } from "@/components/ui/button"
-import { Loader2 } from "lucide-react"
 import { signInSchema } from "@/schemas/signInSchema"
 import { signIn } from "next-auth/react"
 

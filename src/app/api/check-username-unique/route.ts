@@ -10,7 +10,7 @@ const UsernameQuerySchema = z.object({
 
 export async function GET(request: Request) {
 
-    //  TODO: use in all other routes
+    //  TODO: use in all other routes (no longer required as NEXT.js automatically does this)
     // if (request.method !== 'GET') {
     //     return Response.json({
     //         success: false,
@@ -21,6 +21,8 @@ export async function GET(request: Request) {
     await dbConnect()
     
     try {
+
+        // first we will exract username from the url
         const { searchParams } = new URL(request.url)
         const queryParam = {
             username: searchParams.get('username')
@@ -28,8 +30,9 @@ export async function GET(request: Request) {
 
         //validate with zod
         const result = UsernameQuerySchema.safeParse(queryParam)  
-        console.log(result) //TODO: remove
+        // console.log(result) //TODO: remove
 
+        // return all the errors when username is not valid
         if (!result.success) {
             const usernameErrors = result.error.issues.map(issue => issue.message) || []
             return Response.json({
@@ -45,6 +48,7 @@ export async function GET(request: Request) {
             isVerified: true
         })
 
+        // check if username already exist
         if (existingVerifiedUser) {
             return Response.json({
                 success: false,

@@ -1,7 +1,6 @@
 import dbConnect from "@/lib/dbConnect";
 import UserModel from "@/model/User";
 import { Message } from "@/model/User"
-import { success } from "zod";
 
 export async function POST(request:Request) {
     await dbConnect()
@@ -11,6 +10,7 @@ export async function POST(request:Request) {
     try {
         const user = await UserModel.findOne({username})
 
+        // check is user exist or not
         if (!user) {
             return Response.json(
                 {
@@ -21,13 +21,15 @@ export async function POST(request:Request) {
             )
         }
 
+        // check if user accept message or not
         if (!user.isAcceptingMessage) {
             return Response.json({
                 success: false,
-                message: "User is not accepint the messages"
+                message: "User is not accepting the messages"
             }, {status: 403})
         }
 
+        // then push message in messages
         const newMessage = { content , createdAt: new Date() }
         user.messages.push(newMessage as Message)
         await user.save()

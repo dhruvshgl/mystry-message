@@ -10,7 +10,6 @@ export async function proxy(request: NextRequest) {
 
     if (token && 
         (
-            url.pathname.startsWith('/') ||
             url.pathname.startsWith('/sign-up') ||
             url.pathname.startsWith('/sign-in') ||
             url.pathname.startsWith('/verify') 

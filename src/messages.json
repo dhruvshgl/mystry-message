@@ -1,0 +1,32 @@
+[
+  {
+    "title": "Message from User123",
+    "content": "Hey, how are you doing today?",
+    "received": "10 minutes ago"
+  },
+  {
+    "title": "Message from SecretAdmirer",
+    "content": "I really liked your recent post!",
+    "received": "2 hours ago"
+  },
+  {
+    "title": "Message from MysteryGuest",
+    "content": "Do you have any book recommendations?",
+    "received": "1 day ago"
+  },
+  {
+    "title": "Message from SunsetChaser",
+    "content": "Did you catch the game last night?",
+    "received": "15 minutes ago"
+  },
+  {
+    "title": "Message from PixelDreamer",
+    "content": "Your photography skills are amazing!",
+    "received": "3 hours ago"
+  },
+  {
+    "title": "Message from CosmicWanderer",
+    "content": "Have you tried that new coffee shop downtown?",
+    "received": "2 days ago"
+  }
+]
