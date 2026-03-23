@@ -2,10 +2,9 @@
 import React from 'react'
 import {
     Card,
-    CardAction,
+
     CardContent,
-    CardDescription,
-    CardFooter,
+
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
@@ -32,29 +31,37 @@ type MessageCardProps = {
     onMessageDelete: (messageId: string) => void
 }
 
-export function MessageCard({ message , onMessageDelete } : MessageCardProps ) {
-    
+export function MessageCard({ message, onMessageDelete }: MessageCardProps) {
+
     const handleDeleteConfirm = async () => {
         const response = await axios.delete<ApiResponse>(`/api/delete-message/${message._id}`)
         toast.success(response.data.message)
         onMessageDelete(message._id.toString())
     }
-    
+
 
     return (
         <Card>
-            <CardHeader>
-                <CardTitle>Card Title</CardTitle>
+            <CardHeader className="flex flex-row justify-between items-center">
+                <CardTitle className="text-sm text-gray-500">
+                    {new Date(message.createdAt).toLocaleString('en-IN', {
+                        month: 'long',
+                        day: 'numeric',
+                        year: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        hour12: true
+                    })}
+                </CardTitle>
                 <AlertDialog>
                     <AlertDialogTrigger asChild>
-                        <Button variant="destructive"><X className="w-5 h-5" /></Button>
+                        <Button variant="destructive" size="icon"><X className="w-5 h-5" /></Button>
                     </AlertDialogTrigger>
                     <AlertDialogContent>
                         <AlertDialogHeader>
                             <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
                             <AlertDialogDescription>
-                                This action cannot be undone. This will permanently delete your
-                                account from our servers.
+                                This action cannot be undone. This will permanently delete your message from our servers.
                             </AlertDialogDescription>
                         </AlertDialogHeader>
                         <AlertDialogFooter>
@@ -63,14 +70,13 @@ export function MessageCard({ message , onMessageDelete } : MessageCardProps ) {
                         </AlertDialogFooter>
                     </AlertDialogContent>
                 </AlertDialog>
-                <CardDescription>Card Description</CardDescription>
             </CardHeader>
             <CardContent>
-                <p>Card Content</p>
+                <p className="text-lg font-medium leading-relaxed">
+                    Message: {message.content}
+                </p>
             </CardContent>
-            <CardFooter>
-                <p>Card Footer</p>
-            </CardFooter>
+
         </Card>
     )
 }
