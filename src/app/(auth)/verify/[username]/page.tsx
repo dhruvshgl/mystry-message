@@ -33,9 +33,9 @@ const VerifyAccount = () => {
                 code: data.code
             })
 
-            toast.success("Success", {
-            description: response.data.message
-            })
+                    toast.success("Success", {
+                        description: response.data.message
+                    })
 
             router.replace('sign-up')
         } catch (error) {
@@ -49,7 +49,7 @@ const VerifyAccount = () => {
 
     return (
     <div className='flex justify-center items-center min-h-screen bg-gray-100'>
-        <div className='w-ful max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md'>
+        <div className='w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md'>
             <div className='text-center'>
                 <h1 className='text-4xl font-extrabold tracking-tight lg:text-5xl mb-6'>
                     Verify your Account

@@ -1,6 +1,6 @@
 import dbConnect from "@/lib/dbConnect";
 import UserModel from "@/model/User";
-import { z } from "zod/mini";
+import { z } from "zod";
 import { usernameValidation } from "@/schemas/signUpSchema";
 
 
@@ -19,7 +19,7 @@ export async function GET(request: Request) {
     // }
 
     await dbConnect()
-    
+
     try {
 
         // first we will exract username from the url
@@ -28,8 +28,15 @@ export async function GET(request: Request) {
             username: searchParams.get('username')
         }
 
+        if (!queryParam.username) {
+            return Response.json({
+                success: false,
+                message: "Username is required"
+            }, { status: 400 })
+        }
+
         //validate with zod
-        const result = UsernameQuerySchema.safeParse(queryParam)  
+        const result = UsernameQuerySchema.safeParse(queryParam)
         // console.log(result) //TODO: remove
 
         // return all the errors when username is not valid
@@ -38,7 +45,7 @@ export async function GET(request: Request) {
             return Response.json({
                 success: false,
                 message: usernameErrors.length > 0 ? "Username error: " + usernameErrors.join(", ") : "Invalid username parameter"
-            }, {status: 400})
+            }, { status: 400 })
         }
 
         const { username } = result.data
@@ -53,23 +60,23 @@ export async function GET(request: Request) {
             return Response.json({
                 success: false,
                 message: 'Username is already taken'
-            }, {status : 400})
+            }, { status: 400 })
         }
 
         return Response.json({
-                success: true,
-                message: 'Username is available'
-            }, {status : 200})
+            success: true,
+            message: 'Username is available'
+        }, { status: 200 })
 
     } catch (error) {
-        console.error("Error checking username" , error)
+        console.error("Error checking username", error)
         return Response.json(
             {
                 success: false,
                 message: "Error checking username"
             },
             {
-                status : 500
+                status: 500
             }
         )
     }
