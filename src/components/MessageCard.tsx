@@ -73,7 +73,7 @@ export function MessageCard({ message, onMessageDelete }: MessageCardProps) {
             </CardHeader>
             <CardContent>
                 <p className="text-lg font-medium leading-relaxed">
-                    Message: {message.content}
+                    {message.content}
                 </p>
             </CardContent>
 

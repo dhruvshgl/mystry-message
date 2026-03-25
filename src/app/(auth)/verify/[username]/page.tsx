@@ -37,7 +37,7 @@ const VerifyAccount = () => {
                         description: response.data.message
                     })
 
-            router.replace('sign-up')
+            router.replace('/dashboard')
         } catch (error) {
             console.error("Error in verifying user" , error)
             const axiosError = error as AxiosError<ApiResponse>
